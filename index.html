@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact me</title>
+    <link href="https://fonts.googleapis.com/css2?family=K2D:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="contact.css" />
+</head>
+
+<body>
+    <div id="outercontainer">
+        <div id="contact">Contact Me</div>
+        <div id="form">
+            <form id="container" onsubmit="sendEmail(); this.reset(); return false;">
+                <div>
+                    <input type="text" placeholder="Name" class="formitems" id="name" required />
+                </div>
+                <div>
+                    <input type="number" placeholder="Phone number" class="formitems" id="phone" required />
+                </div>
+                <div id="emailID">
+                    <input type="text" placeholder="Email ID" class="formitems" id="email" required />
+                </div>
+                <div id="subject">
+                    <select name="service" id="service" class="Formitems" required>
+                        <option value="" disabled selected>Service Of Interest</option>
+                        <option value="Project Collaboration">
+                            Project Collaboration
+                        </option>
+                        <option value="guidance">Mentorship and Guidance</option>
+                        <option value="research">Research Partnerships</option>
+                        <option value="workshop">Workshop and Training Requests</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <textarea class="formitems" id="purpose" placeholder="Describe your Purpose" required></textarea>
+                </div>
+                <div id="btn">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail() {
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const service = document.getElementById("service").value;
+            const purpose = document.getElementById("purpose").value;
+
+            const emailBody = `
+            <ul>
+                    <li>Name: ${name}</li>
+                    <li>Phone: ${phone}</li>
+                    <li>Service Type: ${service}</li>
+                    <li>Purpose: ${purpose}</li>
+            </ul>
+          `;
+
+            Email.send({
+                SecureToken: "4c6e9075-c2b2-477d-82b8-c6722068a03d",
+                To: "devanshprataps98@gmail.com",
+                From:"devanshprataps98@gmail.com" ,
+                Subject: "New contact form submission",
+                Body: emailBody,
+            }).then((message) => alert("Message Sent Successfully"));
+        }
+    </script>
+</body>
+
+</html>
+
